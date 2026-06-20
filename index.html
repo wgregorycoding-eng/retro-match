@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RetroMatch // Arcade Edition</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts for Retro Pixel Style -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assests/css/style.css"/>
+  </head>
+  <body>
+    <!-- Main Arcade Cabinet Layout -->
+    <div class="container my-4 text-center">
+      <header class="mb-4">
+        <h1 class="arcade-title text-uppercase">👾 RetroMatch 👾</h1>
+        <p class="subtitle">Insert Coin to Play... Just Kidding, It's Free.</p>
+      </header>
+
+      <!-- Stats HUD (Heads Up Display) -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-md-8">
+          <div
+            class="hud-panel d-flex justify-content-around align-items-center p-3"
+          >
+            <div>
+              SCORE: <span id="score-counter" class="text-neon-cyan">0000</span>
+            </div>
+            <div>
+              TIME: <span id="timer" class="text-neon-magenta">00:00</span>
+            </div>
+            <div>
+              HI-SCORE:
+              <span id="high-score" class="text-neon-green">0000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls Menu -->
+      <div class="mb-4">
+        <button id="start-btn" class="arcade-btn btn-cyan">START GAME</button>
+        <button id="reset-btn" class="arcade-btn btn-magenta d-none">
+          RESET
+        </button>
+      </div>
+
+      <!-- Dynamic Game Board Area -->
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <div id="game-board" class="game-grid">
+            <!-- JavaScript will dynamically inject cards here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Retro Game Over / Win Modal -->
+    <div
+      class="modal fade"
+      id="winModal"
+      tabindex="-1"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content arcade-modal-content text-center">
+          <div class="modal-body p-5">
+            <h2 class="text-neon-green mb-4">VICTORY!</h2>
+            <p class="mb-4">YOU MATCHED ALL PIXELS!</p>
+            <p class="final-score-text mb-4">
+              FINAL SCORE: <span id="final-score">0</span>
+            </p>
+            <button
+              type="button"
+              class="arcade-btn btn-cyan"
+              data-bs-dismiss="modal"
+              id="modal-play-again-btn"
+            >
+              PLAY AGAIN
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core Game Logic Engine -->
+    <script src="assests/js/script.js"></script>
+  </body>
+</html>
