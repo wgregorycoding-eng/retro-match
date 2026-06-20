@@ -1,4 +1,4 @@
-# RetroMatch // Arcade Edition
+# RetroMatch // Arcade Game Version
 
 RetroMatch is a vibrant, browser-based 8-bit retro arcade-themed memory card matching game. Designed to replicate the engaging aesthetic of 1980s arcade cabinet screens, this dynamic front-end web application tests players' visual memory and speed while offering an immersive synthwave and pixelated user experience.
 
