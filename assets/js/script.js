@@ -1,3 +1,4 @@
+// RetroMatch Core Engine - Built in 2026
 /**
  * RETROMATCH GAME ENGINE
  * Core Javascript logic for grid creation, card states, and score evaluation.
