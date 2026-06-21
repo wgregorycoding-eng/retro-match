@@ -1,122 +1,149 @@
 /* Core Custom Variables */
 :root {
-    --bg-dark: #0a0a16;
-    --panel-bg: #14142b;
-    --neon-cyan: #00f0ff;
-    --neon-magenta: #ff0055;
-    --neon-green: #39ff14;
-    --retro-font: 'Press Start 2P', monospace;
+  --bg-dark: #0a0a16;
+  --panel-bg: #14142b;
+  --neon-cyan: #00f0ff;
+  --neon-magenta: #ff0055;
+  --neon-green: #39ff14;
+  --retro-font: "Press Start 2P", monospace;
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: #ffffff;
-    font-family: var(--retro-font);
-    font-size: 14px;
-    image-rendering: pixelated; /* Keeps crisp edges on retro graphics */
+  background-color: var(--bg-dark);
+  color: #ffffff;
+  font-family: var(--retro-font);
+  font-size: 14px;
+  image-rendering: pixelated; /* Keeps crisp edges on retro graphics */
 }
 
 /* Typography & Neon Text Glows */
 .arcade-title {
-    font-size: 2.5rem;
-    color: #fff;
-    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow:
+    0 0 10px var(--neon-cyan),
+    0 0 20px var(--neon-cyan);
 }
 .subtitle {
-    font-size: 0.8rem;
-    color: #888;
+  font-size: 0.8rem;
+  color: #888;
 }
-.text-neon-cyan { color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); }
-.text-neon-magenta { color: var(--neon-magenta); text-shadow: 0 0 5px var(--neon-magenta); }
-.text-neon-green { color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); }
+.text-neon-cyan {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 5px var(--neon-cyan);
+}
+.text-neon-magenta {
+  color: var(--neon-magenta);
+  text-shadow: 0 0 5px var(--neon-magenta);
+}
+.text-neon-green {
+  color: var(--neon-green);
+  text-shadow: 0 0 5px var(--neon-green);
+}
 
 /* HUD Control Panels */
 .hud-panel {
-    background-color: var(--panel-bg);
-    border: 4px solid #ffffff;
-    border-image: linear-gradient(to right, var(--neon-cyan), var(--neon-magenta)) 1;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  background-color: var(--panel-bg);
+  border: 4px solid #ffffff;
+  border-image: linear-gradient(to right, var(--neon-cyan), var(--neon-magenta))
+    1;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
 /* Custom 8-bit Arcade Buttons */
 .arcade-btn {
-    font-family: var(--retro-font);
-    font-size: 0.9rem;
-    padding: 10px 20px;
-    background: transparent;
-    color: #fff;
-    border: 4px solid #fff;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin: 5px;
+  font-family: var(--retro-font);
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  background: transparent;
+  color: #fff;
+  border: 4px solid #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 5px;
 }
-.btn-cyan { border-color: var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan); }
-.btn-cyan:hover { background-color: var(--neon-cyan); color: #0a0a0a; box-shadow: 0 0 20px var(--neon-cyan); }
-.btn-magenta { border-color: var(--neon-magenta); box-shadow: 0 0 8px var(--neon-magenta); }
-.btn-magenta:hover { background-color: var(--neon-magenta); color: #0a0a0a; box-shadow: 0 0 20px var(--neon-magenta); }
+.btn-cyan {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan);
+}
+.btn-cyan:hover {
+  background-color: var(--neon-cyan);
+  color: #0a0a0a;
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+.btn-magenta {
+  border-color: var(--neon-magenta);
+  box-shadow: 0 0 8px var(--neon-magenta);
+}
+.btn-magenta:hover {
+  background-color: var(--neon-magenta);
+  color: #0a0a0a;
+  box-shadow: 0 0 20px var(--neon-magenta);
+}
 
 /* The Game Grid Canvas */
 .game-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 20px;
 }
 
 /* 3D Card Container Component */
 .memory-card {
-    aspect-ratio: 1 / 1;
-    position: relative;
-    cursor: pointer;
-    transform: scale(1);
-    transform-style: preserve-3d;
-    transition: transform 0.4s ease;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  cursor: pointer;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
 }
 
 .memory-card:active {
-    transform: scale(0.95);
-    transition: transform 0.1s;
+  transform: scale(0.95);
+  transition: transform 0.1s;
 }
 
 /* Card State Class (Applied by JavaScript) */
 .memory-card.flipped {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 /* Shared Card Face Styling */
-.card-front, .card-back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 4px;
-    backface-visibility: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    border: 4px solid #fff;
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 4px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border: 4px solid #fff;
 }
 
 /* Front Face (Hidden initially) */
 .card-front {
-    background-color: #202040;
-    border-color: var(--neon-cyan);
-    box-shadow: inset 0 0 10px var(--neon-cyan);
-    transform: rotateY(180deg);
+  background-color: #202040;
+  border-color: var(--neon-cyan);
+  box-shadow: inset 0 0 10px var(--neon-cyan);
+  transform: rotateY(180deg);
 }
 
 /* Back Face (Visible initially) */
 .card-back {
-    background-color: #111;
-    border-color: var(--neon-magenta);
-    box-shadow: inset 0 0 10px var(--neon-magenta);
-    color: var(--neon-magenta);
+  background-color: #111;
+  border-color: var(--neon-magenta);
+  box-shadow: inset 0 0 10px var(--neon-magenta);
+  color: var(--neon-magenta);
 }
 
 /* Modal Styling Overrides */
 .arcade-modal-content {
-    background-color: var(--panel-bg);
-    border: 4px solid var(--neon-green) !important;
-    box-shadow: 0 0 30px var(--neon-green);
-    color: #fff;
+  background-color: var(--panel-bg);
+  border: 4px solid var(--neon-green) !important;
+  box-shadow: 0 0 30px var(--neon-green);
+  color: #fff;
 }
