@@ -77,8 +77,45 @@ To ensure the application strictly adheres to the dynamic response requirements,
 * Thoroughly audited utilizing developer viewport simulators spanning mobile standards (iPhone SE, iPhone 14 Pro, Samsung Galaxy S22), tablet dimensions (iPad Air, iPad Mini), and high-resolution desktop configurations. 
 
 ---
+## 5. Bugs & Resolving History (Criterion M(viii))
 
-## 🚀 5. Deployment Procedures
+During the manual verification process of the development life cycle, several core logical and structural errors were identified, evaluated, and resolved.
+
+### Resolved Bugs
+
+#### 1. The Rapid Click Exploit (State Breakdown)
+
+* **Bug:** If a player click-spammed 3 or more cards in rapid succession before the first mismatch finished flipping back over, the DOM interface got out of sync. This allowed cards to stay permanently exposed without a match.
+* **Evaluation:** The event listeners were continuing to process card clicks during the 1-second timeout delay of `unflipCards()`.
+* **Fix:** Implemented a global board state lock (`lockBoard = false`). The moment two cards are flipped, `lockBoard` transitions to `true` inside `unflipCards()`, blocking all input event triggers until the board state resets:
+
+![Rapid Click Fix Implementation](assets/images/rapid-click-fix.png)
+
+
+#### 2. The Card Self-Click Match Hack
+
+* **Bug:** If a player clicked the exact same card twice, the game engine evaluated it as a matched pair and permanently locked the card as "solved".
+* **Evaluation:** The system was comparing the selected card element to itself, resulting in a perfect string-value matching match.
+* **Fix:** Implemented a strict reference validation check as a defensive guard block inside `flipCard()`:
+
+![Self Click Guard Clause](assets/images/self-click-fix.png)
+
+
+#### 3. Broken Assets Directory Routing Error
+* **Bug:** On the local development server, the application's CSS styles and retro fonts failed to load, presenting a default white screen.
+* **Evaluation:** A directory typo (`assests/` instead of `assets/`) in the folder tree was causing the HTML header links to throw 404 resource errors.
+* **Fix:** Corrected the directory folder tree name to a standardized `assets/` sub-directory naming convention, matching the relative link paths cleanly inside both `index.html` and the server terminal.
+
+---
+
+### Unfixed / Intentional Design Choices
+
+#### 1. Lack of Sound Effects on Interaction
+* **Bug/Limitation:** There is no sound feedback when flipping cards or matching symbols.
+* **Evaluation & Rationale:** While classic retro cabinets utilize synthesized chime outputs, audio autoplay and sudden interaction sound sequences can conflict with modern accessibility standards and user control guidelines (causing disruption in public settings). To preserve a user-controlled experience and conform to high-grade UX parameters, sound has been omitted from this iteration. This will be revisited in future builds as a fully opt-in, toggleable setting
+---
+
+## 🚀 6. Deployment Procedures
 
 The source workspace is actively managed under Git version tracking control and hosted publicly via GitHub Pages.
 
@@ -92,7 +129,7 @@ The source workspace is actively managed under Git version tracking control and 
 
 ---
 
-## ✒️ 6. External Attributions
+## ✒️ 7. External Attributions
 
 * **The Shuffling Methodology:** The randomized collection redistribution system relies on an implementation of the **Fisher-Yates Shuffle Algorithm**, standard across JavaScript matrix array processing.
 * **Layout Blocks:** Grid alignment rules, utility layout spacings, and contextual container dimensions were adapted from the official [Bootstrap Documentation](https://getbootstrap.com/docs/5.3/).
