@@ -1,136 +1,101 @@
 # RetroMatch // Arcade Game Version
 
-RetroMatch is a vibrant, browser-based 8-bit retro arcade-themed memory card matching game. Designed to replicate the engaging aesthetic of 1980s arcade cabinet screens, this dynamic front-end web application tests players' visual memory and speed while offering an immersive synthwave and pixelated user experience.
+RetroMatch is a fast-paced, browser-based memory card matching game styled like an 8-bit 1980s arcade cabinet. Built as a front-end web application, it tests the player's memory and speed using a vibrant synthwave aesthetic.
 
-The live project can be viewed here:(https://wgregorycoding-eng.github.io/retro-match/)
+**[View the Live Project Here](https://wgregorycoding-eng.github.io/retro-match/)**
 
 ---
 
 ## 🎯 1. User Experience (UX)
 
 ### Project Goals
-The primary goal of RetroMatch is to provide a nostalgic, fast-paced, and highly interactive casual gaming experience directly inside the browser. It serves as a proof-of-concept milestone project demonstrating robust DOM manipulation, state-driven JavaScript, responsive grid layout logic, and persistent browser storage mechanics without requiring any back-end infrastructure.
+The main goal of RetroMatch was to build a fun, nostalgic casual game that runs smoothly directly in the browser. Technically, it serves as a milestone project to demonstrate robust DOM manipulation, state management in pure JavaScript, responsive layout design, and persistent browser storage—all without needing a backend.
 
 ### User Stories
-* **As a first-time visitor:**
-  * I want to instantly understand the purpose of the game from the visual interface.
-  * I want to see a clear call-to-action (like a "START GAME" button) to begin playing immediately.
-  * I want the interface to feel cohesive, well-structured, and easy to navigate on both my phone and my desktop.
+* **First-time players:** I want to understand how to play immediately from looking at the screen, see a clear "START GAME" button, and have the game scale perfectly whether I'm playing on my phone or a desktop.
+* **Returning players:** I want to track my score and time while playing, have my highest score saved so I can try to beat it later, and be blocked from accidentally breaking the game rules by spam-clicking.
 
-* **As a returning player:**
-  * I want to track my current score and elapsed time continuously as I interact with the canvas.
-  * I want my highest-ever score to be saved securely in the browser so that I can challenge my past records over multiple sessions.
-  * I want a failsafe mechanism that prevents accidental double-clicking or rapid click-spamming from breaking the game rules.
-
-### Design Identity
-* **Typography:** Utilizes Google Fonts' `'Press Start 2P'` to achieve an authentic pixelated arcade aesthetic across all headers, stats elements, and dynamic UI panels.
-* **Color Palette:**
-  * **Background Space:** Deep Void Black (`#0a0a16`)
-  * **Primary UI Trim / Front Face:** Neon Cyan (`#00f0ff`)
-  * **Secondary Borders / Cards Backing:** Neon Magenta (`#ff0055`)
-  * **Success / Win Indicators:** Cyber Green (`#39ff14`)
-* **Wireframe Layout:** Structured around a centralized focus canvas. The top layout houses the static and dynamic system metrics (Heads Up Display panel), followed cleanly by primary button elements, leading downward directly into a perfectly balanced $4 \\times 4$ CSS grid alignment.
+### Design & Theme
+* **Typography:** Uses the 'Press Start 2P' Google Font to capture that classic pixelated arcade look.
+* **Color Palette:** A dark cyber-punk theme using Deep Void Black (`#0a0a16`), Neon Cyan (`#00f0ff`), Neon Magenta (`#ff0055`), and Cyber Green (`#39ff14`).
+* **Layout:** A clean, centralized layout. The top section acts as the arcade HUD (displaying stats and buttons), leading down into a perfectly centered 4×4 grid for the game board.
 
 ---
 
-## ⚡ 2. App Features & Core Architecture
+## ⚡ 2. Core Features
 
-### Active Interface Components
-* **Dynamic Heads-Up Display (HUD):** Continuously monitors and pushes updates for the player's current score tally, active session clock runtime, and the saved global persistent high score.
-* **3D Animated Isometric Card Flip:** Leverages hardware-accelerated CSS `perspective` and `backface-visibility` parameters, allowing cards to cleanly perform dynamic 180-degree physical rotations when engaged by click interactions.
-* **Smart Board-Lock Mechanism (Anti-Spam Safeguard):** Integrates an asynchronous concurrency safety interlock (`lockBoard = true`). If a player attempts to spam-click multiple items simultaneously, the board safely queues event execution, preserving grading integrity.
-* **Time-Bonus Multiplier Matrix:** Rewarding speed as well as accuracy, the engine evaluates completion times upon winning and calculates an added mathematical bonus score scaled recursively against the remaining clock window.
-* **Persistent LocalStorage Storage Tracking:** Automatically serializes final point distributions to look up past score arrays in `localStorage`. If the new total clears the historic standard, the metric updates instantly in real-time.
-
----
-
-## 🛠️ 3. Technologies Utilized
-
-### Core Frameworks & Tooling
-* **HTML5:** Provides semantic, SEO-friendly layout foundations and structure.
-* **CSS3 (Custom Native Modules):** Governs advanced 3D transformation logic, keyframed color-pulsing glows, specific image rendering configurations, and theme variables.
-* **JavaScript (ES6+ Custom Engine):** Powers the core algorithmic state machines, random generation vectors, interval timing mechanisms, and localized browser caching structures.
-* **Bootstrap v5.3.0:** Ensures responsive grid columns, responsive margins, and the dynamic rendering of the Game Over/Victory modal container.
-* **Google Fonts API:** Provides the typography standard used throughout the application workspace.
+* **Dynamic HUD:** Real-time tracking for the player's current score, an active session timer, and the saved high score.
+* **3D Card Flip Animation:** Uses CSS 3D transforms (`perspective` and `backface-visibility`) to give the cards a realistic flipping effect when clicked.
+* **Click-Spam Safeguard:** Includes a board-locking mechanism (`lockBoard = true`). If a player tries to click multiple cards rapidly, the board ignores extra inputs until the current turn resolves.
+* **Time-Bonus Multiplier:** To reward fast play, players get a mathematical bonus added to their final score based on how quickly they cleared the board.
+* **High Score Persistence:** Uses `localStorage` to save user scores. If a new score beats the historical high score, the HUD updates instantly.
 
 ---
 
-## 🧪 4. Testing Protocols & Validation
+## 🛠️ 3. Technologies Used
 
-To ensure the application strictly adheres to the dynamic response requirements, extensive manual testing sweeps were executed across various cross-platform environments.
-
-### Core Logic Verification Matrix
-
-| Target Behavior | Input Action | Expected Technical Response | System Status |
-| :--- | :--- | :--- | :--- |
-| **Grid Generation** | Click `START GAME` | Array duplications occur; values shuffle; 16 card structures load. | **PASSED** |
-| **Unique Card Click** | Click a single face-down item | The card flips up cleanly to expose its symbol. | **PASSED** |
-| **Self-Click Loop Avoidance** | Click an identical active card | Double-click register is intercepted; logic halts safely. | **PASSED** |
-| **Matched Items Lock** | Click two identical cards | Both elements lock in the flipped position; score gains +100pts. | **PASSED** |
-| **Mismatched Reversion** | Click two distinct cards | Elements display for 1s, then flip face-down; score loses -10pts. | **PASSED** |
-| **Confronting Click Spam** | Fast tap 5 items in < 1s | The `lockBoard` variable drops subsequent inputs during delays. | **PASSED** |
-| **Win Condition Trigger** | Clear all 8 unique pairs | Clock halts; final scores process; Victory Modal emerges. | **PASSED** |
-| **State Caching System** | Reload application after win | Data is pulled from `localStorage`; high score is displayed. | **PASSED** |
-
-### Device & Viewport Adaptability Checks
-* Validated smoothly inside Google Chrome, Mozilla Firefox, Apple Safari, and Microsoft Edge.
-* Thoroughly audited utilizing developer viewport simulators spanning mobile standards (iPhone SE, iPhone 14 Pro, Samsung Galaxy S22), tablet dimensions (iPad Air, iPad Mini), and high-resolution desktop configurations. 
+* **HTML5:** For semantic layout structure.
+* **CSS3:** For custom styling, 3D card animations, and glowing neon effects.
+* **JavaScript (ES6+):** For the core game logic, card shuffling, timers, and high-score tracking.
+* **Bootstrap v5.3.0:** Used for responsive grid alignments and the victory modal.
+* **Google Fonts API:** For the arcade typography.
 
 ---
-## 5. Bugs & Resolving History (Criterion M(viii))
 
-During the manual verification process of the development life cycle, several core logical and structural errors were identified, evaluated, and resolved.
+## 🧪 4. Testing & Validation
+
+### Game Logic Testing
+I manually tested the core gameplay mechanics across multiple scenarios to ensure the state updates correctly:
+
+| Action / Test Case | Expected Result | Status |
+| :--- | :--- | :--- |
+| **Click "START GAME"** | Cards are duplicated, randomized, and a clean 16-card grid loads. | **PASSED** |
+| **Click a face-down card** | The card flips over smoothly to reveal its symbol. | **PASSED** |
+| **Click an already active card** | The double-click is ignored; the card stays flipped. | **PASSED** |
+| **Match two identical cards** | Both cards stay flipped, lock into place, and score increases (+100 pts). | **PASSED** |
+| **Click two different cards** | Cards stay visible for 1 second, flip back over, and score drops (-10 pts). | **PASSED** |
+| **Spam-click 5 cards in < 1s** | The `lockBoard` variable successfully drops extra inputs during animations. | **PASSED** |
+| **Clear all 8 pairs (Win)** | Timer stops, final time-bonus is added, and the Victory Modal appears. | **PASSED** |
+| **Refresh page after winning** | High score persists and loads automatically from `localStorage`. | **PASSED** |
+
+### Device & Browser Compatibility
+The game was tested and works smoothly across Google Chrome, Mozilla Firefox, Apple Safari, and Microsoft Edge. I used developer tools to audit responsiveness on several viewports, including mobile (iPhone SE, iPhone 14 Pro, Galaxy S22), tablets (iPad Air/Mini), and standard desktop displays.
+
+---
+
+## 🐛 5. Bugs & Fixes
 
 ### Resolved Bugs
+1. **The Rapid Click Exploit**
+   * *Bug:* If a user clicked 3 or more cards really fast before a mismatched pair finished flipping back over, the game state broke and cards got stuck face-up.
+   * *Fix:* Added a `lockBoard` boolean. The moment two cards are selected, `lockBoard` is set to `true`, blocking any further clicks until `unflipCards()` finishes running.
 
-#### 1. The Rapid Click Exploit (State Breakdown)
+2. **The Same-Card Match Hack**
+   * *Bug:* Clicking the exact same card twice was counted as a successful match and locked the card.
+   * *Fix:* Added a strict reference check at the beginning of the click handler to ensure the second clicked card isn't identical to the first.
 
-* **Bug:** If a player click-spammed 3 or more cards in rapid succession before the first mismatch finished flipping back over, the DOM interface got out of sync. This allowed cards to stay permanently exposed without a match.
-* **Evaluation:** The event listeners were continuing to process card clicks during the 1-second timeout delay of `unflipCards()`.
-* **Fix:** Implemented a global board state lock (`lockBoard = false`). The moment two cards are flipped, `lockBoard` transitions to `true` inside `unflipCards()`, blocking all input event triggers until the board state resets:
+3. **Broken Assets Path**
+   * *Bug:* The site initially loaded as a blank white screen locally because fonts and styles failed to fetch.
+   * *Fix:* Caught a typo in the directory path (`assests/` instead of `assets/`). Corrected the folder structure to match the project's relative links.
 
-![Rapid Click Fix Implementation](assets/images/rapid-click-fix.png)
-
-
-#### 2. The Card Self-Click Match Hack
-
-* **Bug:** If a player clicked the exact same card twice, the game engine evaluated it as a matched pair and permanently locked the card as "solved".
-* **Evaluation:** The system was comparing the selected card element to itself, resulting in a perfect string-value matching match.
-* **Fix:** Implemented a strict reference validation check as a defensive guard block inside `flipCard()`:
-
-![Self Click Guard Clause](assets/images/self-click-fix.png)
-
-
-#### 3. Broken Assets Directory Routing Error
-* **Bug:** On the local development server, the application's CSS styles and retro fonts failed to load, presenting a default white screen.
-* **Evaluation:** A directory typo (`assests/` instead of `assets/`) in the folder tree was causing the HTML header links to throw 404 resource errors.
-* **Fix:** Corrected the directory folder tree name to a standardized `assets/` sub-directory naming convention, matching the relative link paths cleanly inside both `index.html` and the server terminal.
+### Intentional Design Choices
+* **No Sound Effects:** While classic arcade games are known for audio chips, sudden autoplay audio can be disruptive. For this iteration, I focused entirely on a visual-first UX. I plan to add audio effects in a future update as a completely opt-in toggle.
 
 ---
 
-### Unfixed / Intentional Design Choices
+## 🚀 6. Deployment
 
-#### 1. Lack of Sound Effects on Interaction
-* **Bug/Limitation:** There is no sound feedback when flipping cards or matching symbols.
-* **Evaluation & Rationale:** While classic retro cabinets utilize synthesized chime outputs, audio autoplay and sudden interaction sound sequences can conflict with modern accessibility standards and user control guidelines (causing disruption in public settings). To preserve a user-controlled experience and conform to high-grade UX parameters, sound has been omitted from this iteration. This will be revisited in future builds as a fully opt-in, toggleable setting
----
-
-## 🚀 6. Deployment Procedures
-
-The source workspace is actively managed under Git version tracking control and hosted publicly via GitHub Pages.
-
-### Detailed Deployment Workflow
-1. Navigate directly to your targeted repository workspace on the **GitHub Dashboard**.
-2. Locate and click on the **Settings** gear icon within the repository navigation tabs.
-3. Scroll down the left sidebar navigation layout until you hit the **Code and automation** segment; select **Pages**.
-4. Inside the primary Build and deployment controls, verify the Source parameter is explicitly set to **"Deploy from a branch"**.
-5. Under the Branch drop-down configuration settings, choose **`main`** (or your primary target folder layer) and retain the root routing setting (`/root`).
-6. Click **Save**. Within a few moments, the automated build action sequence concludes, and an explicit live production page URL is displayed at the top of the pane.
+The project is tracked with Git and hosted on GitHub Pages via these steps:
+1. Go to the repository settings on GitHub.
+2. Select **Pages** from the left sidebar navigation.
+3. Under **Build and deployment**, set the source to "Deploy from a branch".
+4. Select the `main` branch and the root (`/`) directory.
+5. Hit **Save**. The live build generates automatically.
 
 ---
 
-## ✒️ 7. External Attributions
+## ✒️ 7. Credits & Attributions
 
-* **The Shuffling Methodology:** The randomized collection redistribution system relies on an implementation of the **Fisher-Yates Shuffle Algorithm**, standard across JavaScript matrix array processing.
-* **Layout Blocks:** Grid alignment rules, utility layout spacings, and contextual container dimensions were adapted from the official [Bootstrap Documentation](https://getbootstrap.com/docs/5.3/).
-* **Arcade Typography:** Custom fonts are managed and served externally courtesy of the [Google Fonts Library Catalog](https://fonts.google.com/).
+* **Card Shuffling:** Implemented using a standard JavaScript adaptation of the Fisher-Yates Shuffle Algorithm.
+* **Layout:** Responsive structure and modal containers adapted from the Bootstrap Documentation.
+* **Fonts:** Typography served via the Google Fonts library.
